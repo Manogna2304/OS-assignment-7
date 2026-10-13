@@ -46,11 +46,6 @@ The test program forks four CPU-bound children with priorities 2, 6, 12, and 20.
 **Evidence of aging:**   
 **Screenshot:** 
 
-## 6. Problems encountered and resolutions
-- **System-call integration:** 
-- **Thread address-space lifetime:** 
-- **Semaphore blocking/wakeup:** 
-- **Scheduling fairness/aging:** 
 
-## 7. Conclusion
+## 6. Conclusion
 The assignment demonstrates the relationship between process management, shared-memory concurrency, synchronization, deadlock handling, and CPU scheduling. Replace every bracketed placeholder with verified results from the final xv6/QEMU run before submitting. Do not report an unimplemented feature as completed.
