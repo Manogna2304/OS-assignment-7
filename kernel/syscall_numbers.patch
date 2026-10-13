@@ -1,0 +1,11 @@
+# Merge into kernel/syscall.h. Use unused numbers in your exact source tree.
+# These numbers are examples only: first check the highest existing SYS_*.
+#define SYS_sem_init       30
+#define SYS_sem_wait       31
+#define SYS_sem_signal     32
+#define SYS_set_priority   33
+#define SYS_get_priority   34
+
+# If these numbers are already occupied in your tree, choose unused numbers
+# and keep kernel/syscall.h, kernel/syscall.c, user/user.h, and user/usys.pl
+# consistent.

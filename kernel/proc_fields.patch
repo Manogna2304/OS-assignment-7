@@ -1,0 +1,10 @@
+# Merge inside struct proc in kernel/proc.h.
+# Keep the exact field layout and initialization style of your xv6 version.
+  int priority;       // 1 is highest, 20 is lowest
+  int wait_ticks;     // runnable ticks spent waiting; used for aging
+
+# Initialize in allocproc() in kernel/proc.c:
+  p->priority = 10;
+  p->wait_ticks = 0;
+
+# When a process slot is recycled, reset both fields along with other proc state.

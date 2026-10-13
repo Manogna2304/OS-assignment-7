@@ -1,0 +1,27 @@
+# Q4 scheduler integration outline — merge into kernel/proc.c, do not paste
+# this file as a replacement for proc.c.
+#
+# Requirements:
+# 1. Priority values are 1..20; lower number means higher priority.
+# 2. Choose a RUNNABLE process with the lowest numeric priority.
+# 3. Rotate ties fairly (round-robin among equal-priority processes).
+# 4. Age only RUNNABLE processes that were not selected. Once wait_ticks > 30,
+#    improve priority by decrementing it, never below 1, and reset wait_ticks.
+# 5. Reset wait_ticks for the process that is selected.
+#
+# Implementation guidance:
+# - The stock xv6 scheduler typically scans proc[] and switches immediately
+#   for each RUNNABLE process. Replace that selection policy carefully: first
+#   identify the best priority among RUNNABLE processes, then select one tied
+#   process using a rotating starting index/cursor.
+# - Keep all reads/writes of process state and scheduling fields under the
+#   appropriate p->lock. Avoid acquiring the same process lock twice.
+# - The stock scheduler's lock handoff across swtch() is intentional; preserve it.
+# - Aging all RUNNABLE processes must be synchronized. Do not age the RUNNING
+#   process, and do not increment wait_ticks for sleeping/zombie processes.
+# - A global cursor may be declared static in proc.c if your kernel version
+#   supports the desired tie rotation; protect it if it can be accessed by
+#   multiple CPUs.
+#
+# Add set_priority(pid, priority) and get_priority(pid) handlers (see
+# sysproc_additions.c) and syscall wiring. Validate priority in [1,20].

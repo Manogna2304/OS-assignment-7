@@ -1,0 +1,26 @@
+# Merge into the existing syscall table in kernel/syscall.c:
+extern uint64 sys_sem_init(void);
+extern uint64 sys_sem_wait(void);
+extern uint64 sys_sem_signal(void);
+extern uint64 sys_set_priority(void);
+extern uint64 sys_get_priority(void);
+
+# Add entries to the existing syscalls[] table:
+[SYS_sem_init]     sys_sem_init,
+[SYS_sem_wait]     sys_sem_wait,
+[SYS_sem_signal]   sys_sem_signal,
+[SYS_set_priority] sys_set_priority,
+[SYS_get_priority] sys_get_priority,
+
+# Add matching user declarations to user/user.h and entries to user/usys.pl:
+# int sem_init(int, int);
+# int sem_wait(int);
+# int sem_signal(int);
+# int set_priority(int, int);
+# int get_priority(int);
+#
+# entry("sem_init");
+# entry("sem_wait");
+# entry("sem_signal");
+# entry("set_priority");
+# entry("get_priority");

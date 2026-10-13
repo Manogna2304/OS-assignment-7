@@ -1,0 +1,6 @@
+# In kernel/main.c, call semaphores_init() once during boot after spinlocks
+# can safely be initialized and before user processes execute.
+# Example placement must be checked against your version's startup order:
+  semaphores_init();
+
+# Ensure kernel/semaphore.o is included in the kernel Makefile OBJS list.
